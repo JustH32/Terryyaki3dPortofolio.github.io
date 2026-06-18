@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terryyaki - 3D Portfolio</title>
+    <style>
+        /* Import a fun, bold font from Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #004aad; /* Bold Blue background */
+            font-family: 'Roboto', sans-serif;
+            color: black;
+            overflow-x: hidden;
+            scroll-behavior: smooth; /* Enables smooth scrolling */
+        }
+
+        /* Decorative shapes in background */
+        .shape {
+            position: fixed;
+            z-index: -1;
+            opacity: 0.8;
+        }
+        .shape-circle {
+            width: 300px;
+            height: 300px;
+            background: #ffcc00; /* Yellow */
+            border-radius: 50%;
+            top: -100px;
+            left: -100px;
+            border: 5px solid black;
+        }
+        .shape-square {
+            width: 200px;
+            height: 200px;
+            background: #ffcc00;
+            bottom: 10%;
+            right: -50px;
+            border: 5px solid black;
+            transform: rotate(15deg);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .hero-card {
+            background: #ffffff;
+            border: 6px solid black; /* Slightly thicker border for big card */
+            box-shadow: 15px 15px 0px black; /* Bigger shadow */
+            padding: 50px 60px;
+            max-width: 800px; /* Increased width for desktop */
+            width: 100%;
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-card:hover {
+            transform: rotate(0deg);
+        }
+
+        /* Style for the Title Image */
+        .title-logo {
+            width: 100%;
+            max-width: 500px; /* Much bigger logo */
+            margin-bottom: 20px;
+            mix-blend-mode: multiply; 
+        }
+
+        .hero h2 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 2rem; /* Increased font size */
+            background: #ffcc00;
+            display: inline-block;
+            padding: 8px 20px;
+            border: 3px solid black;
+            transform: rotate(2deg);
+            margin-bottom: 25px;
+        }
+
+        .hero p {
+            font-size: 1.2rem; /* Larger text */
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        /* Contact Badges Container */
+        .badges-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .contact-badge {
+            font-size: 1.3rem; /* Larger badges */
+            font-weight: 700;
+            padding: 12px 25px;
+            border-radius: 30px;
+            border: 3px solid black;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 5px 5px 0px black;
+        }
+
+        .roblox-badge {
+            background: #ffcc00;
+            color: black;
+            transform: rotate(-3deg);
+        }
+
+        .discord-badge {
+            background: black;
+            color: #ffcc00;
+            transform: rotate(3deg);
+        }
+
+        /* View Models Button */
+        .view-models-btn {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 18px 40px;
+            background: #004aad;
+            color: white;
+            text-decoration: none;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.5rem; /* Larger button */
+            border: 4px solid black;
+            box-shadow: 6px 6px 0px black;
+            transform: rotate(-1deg);
+            transition: all 0.2s ease;
+        }
+
+        .view-models-btn:hover {
+            transform: rotate(0deg) translateY(-3px);
+            box-shadow: 10px 10px 0px black;
+            background: #00337a;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 80px 20px 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Archivo Black', sans-serif;
+            text-align: center;
+            font-size: 3rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            margin-bottom: 60px;
+            text-shadow: 4px 4px 0px black;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        /* Scrapbook Polaroid Style */
+        .gallery-item {
+            background: white;
+            padding: 15px 15px 40px 15px;
+            border: 4px solid black;
+            box-shadow: 8px 8px 0px black;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+        }
+
+        .gallery-item:nth-child(odd) {
+            transform: rotate(-3deg);
+        }
+        .gallery-item:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .gallery-item:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 12px 12px 0px black;
+            z-index: 10;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            border: 2px solid #ccc;
+        }
+
+        .caption {
+            margin-top: 15px;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.1rem;
+            text-align: center;
+            color: #004aad;
+        }
+
+        /* Tape effect */
+        .tape {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 35px;
+            background: rgba(255, 204, 0, 0.7);
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.85);
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 800px;
+            border: 5px solid #ffcc00;
+            box-shadow: 10px 10px 0px black;
+        }
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #ffcc00;
+            font-size: 50px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            .hero-card {
+                padding: 30px 20px; /* Less padding on small screens */
+                transform: rotate(0deg); /* Straighten card so it doesn't cut off */
+                border-width: 4px;
+                box-shadow: 8px 8px 0px black;
+            }
+            .hero-card:hover {
+                transform: rotate(0deg);
+            }
+            .title-logo {
+                max-width: 100%; /* Logo takes up full width of the card */
+            }
+            .hero h2 {
+                font-size: 1.4rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .contact-badge {
+                font-size: 1rem;
+                padding: 8px 15px;
+            }
+            .view-models-btn {
+                font-size: 1.1rem;
+                padding: 12px 25px;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Shapes -->
+    <div class="shape shape-circle"></div>
+    <div class="shape shape-square"></div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-card">
+            <img src="https://z-cdn-media.chatglm.cn/files/8f8d1de7-39ae-4ac3-a352-a6458def3148.png?auth_key=1881797562-4b9137d14b3a444fa51a83ebc6332ba6-0-197de856f8cde7672d1868d9613b98a2" alt="Terryyaki" class="title-logo">
+            <h2>3D Artist & Roblox Dev</h2>
+            <p>I specialize in creating unique 3D models, props, and assets for games. Check out my Blender work below!</p>
+            
+            <div class="badges-container">
+                <div class="contact-badge roblox-badge">Roblox: mctypro132</div>
+                <div class="contact-badge discord-badge">Discord: Terryyaki</div>
+            </div>
+
+            <a href="#portfolio" class="view-models-btn">View My Models</a>
+        </div>
+    </section>
+
+    <!-- Portfolio Gallery -->
+    <section class="portfolio" id="portfolio">
+        <h2 class="section-title">My 3D Models</h2>
+        <div class="gallery" id="gallery-grid">
+            <!-- JavaScript injects images here -->
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <span class="close-btn">&times;</span>
+        <img class="modal-content" id="img01">
+    </div>
+
+    <script>
+        const portfolioItems = [
+            // --- Newer Models ---
+            { url: "https://z-cdn-media.chatglm.cn/files/b06d5d2a-b994-48e1-a4c9-167708124843.png?auth_key=1881796264-e02c23378f664123808f035c71736994-0-9b2e25a11828395a3548807929096fcb", desc: "Cartoon & Realistic Heads" },
+            { url: "https://z-cdn-media.chatglm.cn/files/b099fe6e-ff7d-46d0-9b5e-5a238fe06095.png?auth_key=1881796264-614f824c304d4383900a500b35f70d96-0-0f76599062dacd0cb92662a25e1b0be2", desc: "Head Topology Study" },
+            { url: "https://z-cdn-media.chatglm.cn/files/ead9379e-41f2-48f5-b0d0-8858cececad7.png?auth_key=1881796264-14bba517d1d448b18e007ddae77a904d-0-b012a347f616509de9aff2c9032e4670", desc: "Grey Head Model" },
+            { url: "https://z-cdn-media.chatglm.cn/files/a3a86b8f-cc8b-443e-8d0f-f7ab82cbe108.png?auth_key=1881796264-3d0c5a40ed55473287ce3915cc19313c-0-e96ab441a675dc54ebcc21056ad15803", desc: "Sword Model & UVs" },
+            { url: "https://z-cdn-media.chatglm.cn/files/219547aa-96ba-43e8-a40f-56ef156e8be2.png?auth_key=1881796264-9f238515f24a47b8beacdcb1a70e0e5c-0-4f07c3e65d541f4967f5ca53cd1a73f2", desc: "Butter Packaging" },
+            { url: "https://z-cdn-media.chatglm.cn/files/32c5e0be-ac6f-4d87-ac89-dd41ea716a9a.png?auth_key=1881796264-11c0084510c84190a3071b97ba46fe2e-0-0dbf6f44743bee6478bf4b18f6b9b0e9", desc: "Translucent Sphere" },
+            { url: "https://z-cdn-media.chatglm.cn/files/e124e2a1-e6c8-42a4-9166-fa3aa0d0fd29.png?auth_key=1881796264-ec3938cd9e244664a9ad2e0d62f74a86-0-75aa0623c1845ede30d053ff472c161a", desc: "Detailed Butter Model" },
+            { url: "https://z-cdn-media.chatglm.cn/files/a5815a7c-2b06-49b6-954e-ee7fb55537f6.png?auth_key=1881796264-74fc9b7e4fe940949b3f7805dee9fa2d-0-2ebaaaaf83cf4c34da550de4e8705b0f", desc: "Cartoon Slime Creature" },
+            { url: "https://z-cdn-media.chatglm.cn/files/564abaf6-7e10-4500-ab2e-c8e47404ab99.png?auth_key=1881796264-4277acdddfb540dbb1b1b7f507a06b94-0-6e1e020e82f06d98e8d431cddfa9a085", desc: "Stylized Red Teeth" },
+            { url: "https://z-cdn-media.chatglm.cn/files/23e0b325-87c8-4de4-bcb3-fd4bb6f04029.png?auth_key=1881796264-f536f5add70844128ecd1314ddcb1d04-0-9da18baa229a6ac677bfe5c828c1a4b6", desc: "Teeth Multi-View" },
+            
+            // --- Older Models ---
+            { url: "https://z-cdn-media.chatglm.cn/files/9401c299-cc9f-43c0-ab21-b47eebd3b581.png?auth_key=1881798143-b4a1c0f8387c4889bde9efd9ce1a0535-0-35dcfd8bdd4c0080df70a747b58fda77", desc: "Translucent Cube" },
+            { url: "https://z-cdn-media.chatglm.cn/files/01611553-c6f7-47da-889e-e1eeba3348de.png?auth_key=1881798143-b393db0451504aa0937c62518662ec91-0-174c20e6cf79fc664c27459bdbcc85c9", desc: "Vintage Airplane Cabin" },
+            { url: "https://z-cdn-media.chatglm.cn/files/d3996bf1-ee48-45a3-a817-2cb86f213c10.png?auth_key=1881798143-df70e4f38c85443399302708dba04eb0-0-9de1e986146676bd58cc6b67a1bafbcb", desc: "First Class Airplane Seat" },
+            { url: "https://z-cdn-media.chatglm.cn/files/ee7c5db8-da1b-475a-8a60-e2fbf15127a0.png?auth_key=1881798143-e35aa8b5768f4e6c8b97ca989d48dc06-0-4a0cf9f47ac9c7e5488e74180b43f9b0", desc: "Modern Airplane Seating" },
+            { url: "https://z-cdn-media.chatglm.cn/files/4da17f30-bf43-4276-b4cd-669b2a543d2c.png?auth_key=1881798143-d7dcce245de047de90b4103154b0b1e8-0-74f76861936b63d44980c76a4235ada6", desc: "Business Class Seat & Console" },
+            { url: "https://z-cdn-media.chatglm.cn/files/2249b707-d4c2-425f-90cb-862e3e6f5af8.png?auth_key=1881798143-70bad2554419463bba6e09d1fdd259d8-0-fb33db73a38e0b31cd669771f4b475ad", desc: "3D Cartoon Characters" }
+        ];
+
+        const galleryGrid = document.getElementById('gallery-grid');
+
+        portfolioItems.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'gallery-item';
+            div.innerHTML = `
+                <div class="tape"></div>
+                <img src="${item.url}" alt="${item.desc}">
+                <div class="caption">${item.desc}</div>
+            `;
+            div.addEventListener('click', () => openModal(item.url, item.desc));
+            galleryGrid.appendChild(div);
+        });
+
+        // Modal Logic
+        const modal = document.getElementById("myModal");
+        const modalImg = document.getElementById("img01");
+        const closeBtn = document.querySelector(".close-btn");
+
+        function openModal(url, desc) {
+            modal.style.display = "block";
+            modalImg.src = url;
+            modalImg.alt = desc;
+        }
+
+        closeBtn.onclick = function() { 
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
